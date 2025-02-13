@@ -23,14 +23,14 @@ const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
         this.apiPaths = {
-            usuarios: '/api/usuarios',
+            usuarios: "/api/usuarios",
         };
         this.app = (0, express_1.default)(); //Primero se la asigno app al constructor y despues afuera de este la declaro como privada y de que tipo es para inicializarla en el constructor
-        this.port = process.env.PORT || '8000'; //Previamente creo en la raiz del proyecto un archivo llamado .env y dentro de el defino el puerto 8000 : Pero ME ESTÁ DANDO UN ERROR YA QUE NO DEFINI el  port y d e que tipo es
+        this.port = process.env.PORT || "8000"; //Previamente creo en la raiz del proyecto un archivo llamado .env y dentro de el defino el puerto 8000 : Pero ME ESTÁ DANDO UN ERROR YA QUE NO DEFINI el  port y d e que tipo es
         // y apar subsanar el otro error   debo utlizar el operador or para decir  que es '8000' PERO TYPO STRING
         //Métodos iniciales
-        //llamemos la conexion
-        this.dbConnection();
+        //llamemos la conexion// POr los momentos desconectemos bdConnectio()
+        //this.dbConnection();
         //llamnenos el middelware
         this.middelwares();
         //Definr mis rutas para llamanrla por edio del constructor
@@ -43,11 +43,11 @@ class Server {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield connection_1.default.authenticate();
-                console.log('Database has been established successfullt.');
+                console.log("Database has been established successfullt.");
             }
             catch (error) {
                 //if (error instanceof Error) throw new Error(`${error}`);
-                console.error('Unable to connect to the database:', error);
+                console.error("Unable to connect to the database:", error);
             }
         });
     }
@@ -58,7 +58,7 @@ class Server {
         //conficurar (parseo) la Lectura del body
         this.app.use(express_1.default.json());
         // lere una Carpeta publica que se creara previamete enel archivo raiz para que lea contenifdo estático
-        this.app.use(express_1.default.static('public'));
+        this.app.use(express_1.default.static("public"));
     }
     //?creamos la funcion routes() y dentro es um middelware
     routes() {
@@ -67,7 +67,7 @@ class Server {
     //?lEVANTEMOS EL SERVIDOR CREANDO UN MÉTOD listen()
     listen() {
         this.app.listen(this.port, () => {
-            console.log('El servidor correindo en el puerto: ' + this.port);
+            console.log("El servidor correindo en el puerto: " + this.port);
         });
     }
 }
